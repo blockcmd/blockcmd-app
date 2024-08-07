@@ -9,13 +9,13 @@ import MobileWarning from '@/components/mobile-warning';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'BlockCMD Inspect',
-  description: 'Interact with any contracts on any chains',
-  metadataBase: new URL('https://inspect.blockcmd.com'),
+  title: 'BlockCMD - Command your blocks',
+  description: 'Explore blockchains with an intuitive product suite',
+  metadataBase: new URL('https://www.blockcmd.com'),
   openGraph: {
-    title: 'BlockCMD Inspect',
-    description: 'Interact with any contracts on any chains',
-    url: 'https://inspect.blockcmd.com',
+    title: 'BlockCMD - Command your blocks',
+    description: 'Explore blockchains with an intuitive product suite',
+    url: 'https://www.blockcmd.com',
     siteName: 'BlockCMD',
     images: [
       {
@@ -30,13 +30,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'BlockCMD Inspect',
-    description: 'Interact with any contracts on any chains',
-    creator: '@blockcmdHQ',
+    title: 'BlockCMD - Command your blocks',
+    description: 'Explore blockchains with an intuitive product suite',
+    creator: '@zxstim',
     images: ['/blockcmd-tbn.png'],
   },
 }
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -47,11 +46,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <main className="flex flex-col gap-8 items-center justify-center py-12 px-4 lg:p-16 font-mono">
-            <div className="hidden lg:flex lg:flex-col lg:gap-12 w-[1280px]">
+            <div className="flex flex-col gap-12">
               {children}
               <Toaster />
             </div>
-            <MobileWarning />
           </main>
         </Providers>
       </body>

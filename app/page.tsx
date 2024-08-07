@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-12 w-[768px] items-center self-center">
+    <div className="flex flex-col gap-12 items-center self-center">
       <div className="flex flex-row gap-4 items-center">
         <Image
           src="/blockcmd-logo.svg"
@@ -15,9 +15,19 @@ export default function Home() {
           height={250}
           className="w-[300px] h-[62.5px]"
         />
-        <h1 className="font-bold text-5xl">/ Inspect</h1>
       </div>
-      <p className="text-xl">Interact with any contracts on any chains</p>
+      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        ⌘ Command your blocks
+      </h1>
+      <p className="leading-7 [&:not(:first-child)]:mt-6 w-96">
+        Explore blockchains with an intuitive product suite that puts you on the
+        cutting edge of technology.
+      </p>
+      <Button asChild>
+        <a href="https://twitter.com/blockcmdHQ" target="_blank">
+          Stay updated
+        </a>
+      </Button>
       <div className="flex flex-col gap-12 w-[400px]">
         <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight">
           My setup
