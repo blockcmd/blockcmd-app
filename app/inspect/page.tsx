@@ -9,6 +9,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 
 export default function Page() {
   return (
@@ -28,6 +29,26 @@ export default function Page() {
         </BreadcrumbList>
       </Breadcrumb>
       <p>Read and write on any contracts with custom ABIs</p>
+      <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight">
+        My setup
+      </h2>
+      <div className="flex flex-col gap-4 w-[300px]">
+        <Button
+          variant="secondary"
+          asChild
+          className="w-full hover:outline hover:outline-offset-1 hover:outline-2"
+        >
+          <Link
+            href="/my-contract-book"
+            className="flex flex-row items-center justify-between"
+          >
+            My contract book <ArrowRight className="ml-2 w-4 h-4" />
+          </Link>
+        </Button>
+      </div>
+      <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight">
+        Select a chain
+      </h2>
       <div className="flex flex-col gap-4 w-[768px]">
         {Chains.map((chain: Chain) => (
           <Link
