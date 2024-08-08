@@ -32,13 +32,24 @@ export default function Home() {
           Tools
         </h2>
         <div className="flex flex-col gap-4">
-          <Link
-            className="flex flex-row justify-between items-center border-2 border-primary hover:bg-primary hover:text-secondary p-4 w-full"
-            href="/inspect"
-          >
-            <p>Inspect</p>
-            <ArrowRight />
-          </Link>
+          <div className="flex flex-col gap-4">
+            <Link
+              className="flex flex-row justify-between items-center border-2 border-primary hover:bg-primary hover:text-secondary p-4 w-full"
+              href="/inspect"
+            >
+              <p>Inspect</p>
+              <ArrowRight />
+            </Link>
+          </div>
+          <div className="flex flex-col gap-4">
+            <Link
+              className="flex flex-row justify-between items-center border-2 border-primary hover:bg-primary hover:text-secondary p-4 w-full"
+              href="/drop"
+            >
+              <p>Drop</p>
+              <ArrowRight />
+            </Link>
+          </div>
         </div>
         {/* <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight">
           Utilities
