@@ -4,6 +4,7 @@ import "./globals.css";
 import '@rainbow-me/rainbowkit/styles.css';
 import { Providers } from './providers';
 import { Toaster } from "@/components/ui/toaster";
+import Footer from "@/components/footer";
 
 const spaceMono = IBM_Plex_Mono({ weight: "500", subsets: ["latin"] });
 
@@ -45,9 +46,10 @@ export default function RootLayout({
       <body className={spaceMono.className}>
         <Providers>
           <main className="flex flex-col gap-8 items-center justify-center py-12 px-4 lg:p-16">
-            <div className="flex flex-col gap-12">
+            <div className="flex flex-col gap-12 max-w-5xl">
               {children}
               <Toaster />
+              <Footer />
             </div>
           </main>
         </Providers>

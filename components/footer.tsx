@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col gap-10 my-24 w-full font-mono">
+    <footer className="flex flex-col gap-10 my-24">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         <div className="flex flex-col gap-2">
           <div className="text-secondary bg-secondary-foreground p-10 rounded-xl">
@@ -15,9 +15,9 @@ export default function Footer() {
           </div>
           <div className="text-secondary bg-secondary-foreground p-10 rounded-xl grow">
             <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight mb-6">Here are some links</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <div className="flex flex-col gap-1">
-                <h3 className="scroll-m-20 text-lg font-semibold tracking-tight mb-2 -mt-2">Team</h3>
+                <h3 className="scroll-m-20 text-lg font-semibold tracking-tight mb-2">Team</h3>
                 <Link href="/our-story" className="text-gray-400 text-sm">Our story</Link>
                 <Link href="/support" className="text-gray-400 text-sm">Support</Link>
                 <Link href="/contributors" className="text-gray-400 text-sm">Contributors</Link>
@@ -27,11 +27,6 @@ export default function Footer() {
                 <Link href="/privacy" className="text-gray-400 text-sm">Privacy policy</Link>
                 <Link href="/community-rules" className="text-gray-400 text-sm">Community rules</Link>
                 <Link href="/company-info" className="text-gray-400 text-sm">Company info</Link>
-              </div>
-              <div className="flex flex-col gap-1">
-                <h3 className="scroll-m-20 text-lg font-semibold tracking-tight mb-2">Job board</h3>
-                <Link href="/join-the-collective" className="text-gray-400 text-sm">Join the collective</Link>
-                <Link href="/form-a-team" className="text-gray-400 text-sm">Form a team</Link>
               </div>
             </div>
           </div>
