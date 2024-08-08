@@ -72,7 +72,7 @@ export default function Page() {
         />
         <Button asChild className="w-fit">
           <Link
-            href={`kaia-kairos/address/${
+            href={`/kaia-kairos/address/${
               contractAddress ? getAddress(contractAddress) : ""
             }`}
           >

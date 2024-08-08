@@ -1,6 +1,6 @@
 import MobileWarning from '@/components/mobile-warning';
 
-export default function InspectLayot({
+export default function InspectLayout({
   children,
 }: {
   children: React.ReactNode
@@ -12,7 +12,5 @@ export default function InspectLayot({
       </div>
       <MobileWarning />
     </div>
-  )
-  
-
+  ) 
 }

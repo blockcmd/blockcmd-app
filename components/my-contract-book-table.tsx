@@ -61,7 +61,7 @@ const columns: ColumnDef<ContractTableEntry>[] = [
       return (
         <Button asChild>
           <Link
-            href={`/${row.getValue("network")}/address/${row.getValue(
+            href={`${row.getValue("network")}/address/${row.getValue(
               "address"
             )}/${row.getValue("id")}`}
           >

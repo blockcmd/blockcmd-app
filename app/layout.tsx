@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import '@rainbow-me/rainbowkit/styles.css';
 import { Providers } from './providers';
 import { Toaster } from "@/components/ui/toaster";
-import MobileWarning from '@/components/mobile-warning';
 
-const inter = Inter({ subsets: ["latin"] });
+const spaceMono = IBM_Plex_Mono({ weight: "500", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: 'BlockCMD - Command your blocks',
@@ -43,9 +42,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={spaceMono.className}>
         <Providers>
-          <main className="flex flex-col gap-8 items-center justify-center py-12 px-4 lg:p-16 font-mono">
+          <main className="flex flex-col gap-8 items-center justify-center py-12 px-4 lg:p-16">
             <div className="flex flex-col gap-12">
               {children}
               <Toaster />

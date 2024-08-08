@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Chains } from "./data";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
@@ -74,21 +73,6 @@ export default function Home() {
               Converter <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>
-        </div>
-        <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight">
-          Inspect chain
-        </h2>
-        <div className="flex flex-col gap-4">
-          {Chains.map((chain) => (
-            <Link
-              key={chain.name}
-              className="flex flex-row justify-between items-center border-2 border-primary hover:bg-primary hover:text-secondary p-4 w-full"
-              href={chain.symbol}
-            >
-              <p>{chain.name}</p>
-              <ArrowRight />
-            </Link>
-          ))}
         </div>
       </div>
     </div>

@@ -47,15 +47,11 @@ export default function Page( { params }: { params: { address: string, contractI
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink href="/inspect">Inspect</BreadcrumbLink>
+            <BreadcrumbLink href="/kaia-kairos">Kaia Kairos</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink href="/inspect/kaia-kairos">Kaia Kairos</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href={`/inspect/kaia-kairos/address/${params.address}`}>{params.address}</BreadcrumbLink>
+            <BreadcrumbLink href={`/kaia-kairos/address/${params.address}`}>{params.address}</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
