@@ -8,7 +8,7 @@ import {
   useWaitForTransactionReceipt,
   useWriteContract,
 } from "wagmi";
-import { parseEther, formatEther } from "viem";
+import { parseEther, formatEther, Address } from "viem";
 import { Loader2, Check, Plus, Info, Trash2 } from "lucide-react";
 import { abi } from "./abi";
 import { CONTRACT_ADDRESS_BAOBAB, CONTRACT_ADDRESS_CYPRESS } from "./contract";
@@ -19,8 +19,6 @@ type AirdropItem = {
   address: string;
   amount: string;
 };
-
-type Address = `0x${string}`;
 
 export function AirdropNative() {
   // state for airdrop list using manual input
@@ -147,7 +145,7 @@ export function AirdropNative() {
             KAIA
           </a>
         </h1>
-        <p>Airdrop KAIA to multiple addresses at once.</p>
+        <p>Airdrop native token to multiple addresses at once.</p>
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">

@@ -35,7 +35,7 @@ export default function AirdropNftsCard() {
           Airdrop NFTs
         </h2>
         {account.address ? (
-          <div>
+          <div className="flex flex-col gap-2">
             <p>Add contract address to check before proceeding</p>
             <div className="flex flex-row gap-4 items-center">
               <Input
@@ -56,7 +56,7 @@ export default function AirdropNftsCard() {
             </div>
           </div>
         ) : (
-          <p>Connect your wallet to proceed</p>
+          <div>Connect your wallet to proceed</div>
         )}
       </div>
       {symbol ? (

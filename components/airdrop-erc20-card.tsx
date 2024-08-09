@@ -35,7 +35,7 @@ export default function AirdropErc20Card() {
           Airdrop ERC20
         </h2>
         {account.address ? (
-          <div>
+          <div className="flex flex-col gap-2">
             <p>Add contract address to check before proceeding</p>
             <div className="flex flex-row gap-4 items-center">
               <Input
@@ -56,11 +56,11 @@ export default function AirdropErc20Card() {
             </div>
           </div>
         ) : (
-          <p>Connect your wallet to proceed</p>
+          <div>Connect your wallet to proceed</div>
         )}
       </div>
       {symbol ? (
-        <Link className="flex flex-col w-[100px] items-center justify-center bg-primary" href={`/airdrop-erc20?address=${contractAddress}`}>
+        <Link className="flex flex-col w-[100px] items-center justify-center bg-primary" href={`/drop/airdrop-erc20?address=${contractAddress}`}>
             <ArrowRight className="w-8 h-8 text-secondary" />
         </Link>
       ) : (
