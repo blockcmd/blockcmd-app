@@ -7,7 +7,7 @@ export default function InspectLayout({
 }) {
   return (
     <div>
-      <div className="hidden lg:flex lg:flex-col lg:gap-12 w-[1280px]">
+      <div className="hidden lg:flex lg:flex-col lg:gap-12">
         {children}
       </div>
       <MobileWarning />

@@ -7,7 +7,7 @@ export default function DropLayout({
 }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="hidden lg:flex lg:flex-col lg:gap-12 w-[768px]">
+      <div className="hidden lg:flex lg:flex-col lg:gap-12">
         {children}
       </div>
       <MobileWarning />
