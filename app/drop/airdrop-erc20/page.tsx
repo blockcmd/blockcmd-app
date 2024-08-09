@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { AirdropERC20 } from "@/components/airdrop-erc20";
 
-export default function Home() {
+export default function Page() {
   return (
     <div className="flex flex-col gap-12">
       <ConnectButton />

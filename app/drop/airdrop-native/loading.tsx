@@ -23,7 +23,7 @@ export default function Loading() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Airdrop ERC20</BreadcrumbPage>
+            <BreadcrumbPage>Airdrop native token</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
