@@ -1,7 +1,6 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import AirdropErc20Card from "@/components/airdrop-erc20-card";
-import AirdropNativeCard from "@/components/airdrop-native-card";
-import AirdropNftsCard from "@/components/airdrop-nfts-card";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -35,9 +34,38 @@ export default function Page() {
         </p>
       </div>
       <div className="flex flex-col gap-8">
-        <AirdropNativeCard />
-        <AirdropErc20Card />
-        <AirdropNftsCard />
+        <Link href="/drop/native">
+          <div className="flex flex-row justify-between items-center shadow-lg w-full p-8 border-2 border-secondary hover:border-primary">
+            <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">
+              Airdrop Native Token
+            </h2>
+            <ArrowRight className="w-8 h-8" />
+          </div>
+        </Link>
+        <Link href="/drop/erc20">
+          <div className="flex flex-row justify-between items-center shadow-lg w-full p-8 border-2 border-secondary hover:border-primary">
+            <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">
+              Airdrop ERC20 Token
+            </h2>
+            <ArrowRight className="w-8 h-8" />
+          </div>
+        </Link>
+        <Link href="/drop/erc721">
+          <div className="flex flex-row justify-between items-center shadow-lg w-full p-8 border-2 border-secondary hover:border-primary">
+            <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">
+              Airdrop ERC721 Token
+            </h2>
+            <ArrowRight className="w-8 h-8" />
+          </div>
+        </Link>
+        <Link href="/drop/erc721">
+          <div className="flex flex-row justify-between items-center shadow-lg w-full p-8 border-2 border-secondary hover:border-primary">
+            <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">
+              Airdrop ERC1155 Token
+            </h2>
+            <ArrowRight className="w-8 h-8" />
+          </div>
+        </Link>
       </div>
     </div>
   );

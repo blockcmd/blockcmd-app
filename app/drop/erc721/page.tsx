@@ -20,6 +20,10 @@ export default function Home() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
+            <BreadcrumbLink href="/drop">Drop</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
             <BreadcrumbPage>Airdrop NFTs</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>

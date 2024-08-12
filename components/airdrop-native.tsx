@@ -7,6 +7,7 @@ import {
   type BaseError,
   useWaitForTransactionReceipt,
   useWriteContract,
+  useAccount
 } from "wagmi";
 import { parseEther, formatEther, Address } from "viem";
 import { Loader2, Check, Plus, Info, Trash2 } from "lucide-react";
@@ -20,7 +21,10 @@ type AirdropItem = {
   amount: string;
 };
 
-export function AirdropNative() {
+export default function AirdropNative() {
+  // get account
+  const account = useAccount();
+
   // state for airdrop list using manual input
   const [airdropList, setAirdropList] = useState<AirdropItem[]>([]);
   const totalAirdropAmount = useMemo(() => {

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Loader2, Check } from "lucide-react";
+import { ArrowRight, Loader2, Check, CircleX } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { type BaseError, useReadContract, useAccount, useChainId } from "wagmi";
@@ -52,11 +52,15 @@ export default function AirdropErc20Card() {
                   <Check className="mr-2 h-6 w-6 text-green-500" />
                   {symbol?.toString()}
                 </p>
-              ) : null}
+              ) : (
+                <p>
+                  n/a
+                </p>
+              )}
             </div>
           </div>
         ) : (
-          <div>Connect your wallet to proceed</div>
+          <p>Connect your wallet to proceed</p>
         )}
       </div>
       {symbol ? (
