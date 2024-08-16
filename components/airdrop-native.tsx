@@ -1,5 +1,6 @@
 "use client";
 
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useEffect, useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -136,24 +137,41 @@ export default function AirdropNative() {
       hash,
     });
 
+  function getChainSymbol(chainId: number) {
+    switch (chainId) {
+      case 1001:
+        return "KAIA";
+      case 8217:
+        return "KAIA";
+      default:
+        return "ETH";
+    }
+  }
+
   return (
     <div className="flex flex-col gap-12 w-[768px]">
       <div className="flex flex-col gap-6">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
           Airdrop{" "}
-          <a
-            className="underline underline-offset-4 text-blue-500"
-            href="https://coinmarketcap.com/currencies/klaytn/"
-            target="_blank"
-          >
-            KAIA
-          </a>
+          <span>
+            {getChainSymbol(chainId)}
+          </span>
         </h1>
         <p>Airdrop native token to multiple addresses at once.</p>
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
           Step 1
+        </h2>
+        <div className="flex flex-row gap-2 items-center">
+          <Info className="h-4 w-4" />
+          <p>Make sure to connect your wallet</p>
+        </div>
+        <ConnectButton />
+      </div>
+      <div className="flex flex-col gap-4">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+          Step 2
         </h2>
         <div className="flex flex-row gap-2 items-center">
           <Info className="h-4 w-4" />
@@ -267,7 +285,7 @@ export default function AirdropNative() {
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-          Step 2
+          Step 3
         </h2>
         <div className="flex flex-row gap-2 items-center">
           <Info className="h-4 w-4" />
@@ -281,7 +299,7 @@ export default function AirdropNative() {
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-          Step 3
+          Step 4
         </h2>
         <div className="flex flex-row gap-2 items-center">
           <Info className="h-4 w-4" />

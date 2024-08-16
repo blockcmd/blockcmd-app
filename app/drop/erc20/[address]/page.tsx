@@ -8,8 +8,9 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { AirdropERC20 } from "@/components/airdrop-erc20";
+import { Address } from "viem";
 
-export default function Page() {
+export default function Page({ params }: { params: { address: Address } }) {
   return (
     <div className="flex flex-col gap-12">
       <ConnectButton />
@@ -28,7 +29,7 @@ export default function Page() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <AirdropERC20 />
+      <AirdropERC20 address={params.address} />
     </div>
   );
 }

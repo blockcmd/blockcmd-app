@@ -61,9 +61,9 @@ const columns: ColumnDef<ContractTableEntry>[] = [
       return (
         <Button asChild>
           <Link
-            href={`${row.getValue("network")}/address/${row.getValue(
+            href={`erc20/address/${row.getValue(
               "address"
-            )}/${row.getValue("id")}`}
+            )}`}
           >
             Go <ArrowRight className="ml-2 w-4 h-4" />
           </Link>
@@ -73,7 +73,7 @@ const columns: ColumnDef<ContractTableEntry>[] = [
   },
 ];
 
-export default function MyContractBookTable({
+export default function MyDropContractBookTable({
   savedContracts,
 }: {
   savedContracts: ContractTableEntry[];

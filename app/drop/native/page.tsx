@@ -12,7 +12,6 @@ import {
 export default function Page() {
   return (
     <div className="flex flex-col gap-12">
-      <ConnectButton />
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>

@@ -1,4 +1,3 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import {
@@ -13,7 +12,6 @@ import {
 export default function Page() {
   return (
     <div className="flex flex-col gap-12 w-[768px]">
-      <ConnectButton />
       <div className="flex flex-col gap-8">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
           Drop

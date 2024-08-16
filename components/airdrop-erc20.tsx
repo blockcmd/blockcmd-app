@@ -18,16 +18,14 @@ import { CONTRACT_ADDRESS_BAOBAB, CONTRACT_ADDRESS_CYPRESS } from "./contract";
 import { useChainId } from "wagmi";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useSearchParams } from "next/navigation";
 
 type AirdropItem = {
   address: string;
   amount: string;
 };
 
-export function AirdropERC20() {
-  const searchParams = useSearchParams();
-  const erc20TokenAddress = searchParams.get("address");
+export function AirdropERC20({ address }: { address: Address }) {
+  const erc20TokenAddress = address
   const account = useAccount();
   // state for airdrop list using manual input
   const [airdropList, setAirdropList] = useState<AirdropItem[]>([]);
