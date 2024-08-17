@@ -61,7 +61,7 @@ const columns: ColumnDef<ContractTableEntry>[] = [
       return (
         <Button asChild>
           <Link
-            href={`erc20/address/${row.getValue(
+            href={`erc20/${row.getValue(
               "address"
             )}`}
           >

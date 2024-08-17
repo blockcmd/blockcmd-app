@@ -55,27 +55,27 @@ export function AirdropERC20({ address }: { address: Address }) {
         abi: erc20Abi,
         functionName: "allowance",
         address: erc20TokenAddress
-          ? (erc20TokenAddress as `0x${string}`)
+          ? (erc20TokenAddress as Address)
           : undefined,
         args: [
-          account.address as `0x${string}`,
+          account.address as Address,
           chainId === 1001 ? CONTRACT_ADDRESS_BAOBAB : CONTRACT_ADDRESS_CYPRESS,
         ],
       },
       {
         abi: erc20Abi,
         functionName: "symbol",
-        address: erc20TokenAddress as `0x${string}`,
+        address: erc20TokenAddress as Address,
       },
       {
         abi: erc20Abi,
         functionName: "name",
-        address: erc20TokenAddress as `0x${string}`,
+        address: erc20TokenAddress as Address,
       },
       {
         abi: erc20Abi,
         functionName: "decimals",
-        address: erc20TokenAddress as `0x${string}`,
+        address: erc20TokenAddress as Address,
       },
     ],
   });
@@ -175,7 +175,7 @@ export function AirdropERC20({ address }: { address: Address }) {
   function handleIncreaseApprovalAmount() {
     approveWriteContract({
       abi: erc20Abi,
-      address: erc20TokenAddress as `0x${string}`,
+      address: erc20TokenAddress as Address,
       functionName: "approve",
       args: [
         chainId === 1001 ? CONTRACT_ADDRESS_BAOBAB : CONTRACT_ADDRESS_CYPRESS,
@@ -194,18 +194,24 @@ export function AirdropERC20({ address }: { address: Address }) {
       hash: approveHash,
     });
 
+
+  function getChainName(chainId: number) {
+    switch (chainId) {
+      case 1001:
+        return "Kaia Kairos";
+      case 8217:
+        return "Kaia Mainnet";
+      default:
+        return "Base"
+    }
+  }
+
   return (
     <div className="flex flex-col gap-12 w-[768px]">
       <div className="flex flex-col gap-6">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
           Airdrop ERC20 on{" "}
-          <a
-            className="underline underline-offset-4 text-blue-500"
-            href="https://coinmarketcap.com/currencies/klaytn/"
-            target="_blank"
-          >
-            KAIA
-          </a>
+          <span>{getChainName(chainId)}</span>
         </h1>
         <p>Airdrop ERC20 tokens to multiple addresses at once.</p>
       </div>
