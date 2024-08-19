@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -36,6 +37,7 @@ export function AirdropERC20({ address }: { address: Address }) {
   }, [airdropList]);
   // get chainID to determine which contract to use
   const chainId = useChainId();
+  const [chainName, setChainName] = useState<string>("");
   const { data: hash, error, isPending, writeContract } = useWriteContract();
   const {
     data: approveHash,
@@ -206,12 +208,17 @@ export function AirdropERC20({ address }: { address: Address }) {
     }
   }
 
+  useEffect(() => {
+    setChainName(getChainName(chainId));
+  }
+  , [chainId]);
+
   return (
     <div className="flex flex-col gap-12 w-[768px]">
       <div className="flex flex-col gap-6">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
           Airdrop ERC20 on{" "}
-          <span>{getChainName(chainId)}</span>
+          <span>{chainName}</span>
         </h1>
         <p>Airdrop ERC20 tokens to multiple addresses at once.</p>
       </div>
@@ -221,9 +228,19 @@ export function AirdropERC20({ address }: { address: Address }) {
         </h2>
         <div className="flex flex-row gap-2 items-center">
           <Info className="h-4 w-4" />
+          <p>Make sure to connect your wallet</p>
+        </div>
+        <ConnectButton />
+      </div>
+      <div className="flex flex-col gap-4">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+          Step 1
+        </h2>
+        <div className="flex flex-row gap-2 items-center">
+          <Info className="h-4 w-4" />
           <p>Review the token information</p>
         </div>
-        {tokenInfoData ? (
+        {tokenInfoData && tokenInfoSuccess ? (
           <div
             className={
               totalAirdropAmount > BigInt(tokenInfoData[0]?.result ?? 0)
@@ -233,14 +250,14 @@ export function AirdropERC20({ address }: { address: Address }) {
           >
             <div className="flex flex-row gap-4 items-center h-16">
               <div className="bg-gray-300 rounded-full h-12 w-12 flex justify-center items-center">
-                <p>{tokenInfoData[1]?.result?.toString().charAt(0)}</p>
+                <p>{tokenInfoData[1]?.result ? tokenInfoData[1]?.result?.toString().charAt(0) : "X"}</p>
               </div>
               <div className="flex flex-col">
                 <p className="font-semibold text-lg">
-                  {tokenInfoData[2]?.result?.toString()}
+                  {tokenInfoData[2]?.result ? tokenInfoData[2]?.result?.toString() : "No token found"}
                 </p>
                 <p className="font-mono text-sm">
-                  {tokenInfoData[1]?.result?.toString()}
+                  {tokenInfoData[1]?.result ? tokenInfoData[1]?.result?.toString() : "No symbol found"}
                 </p>
               </div>
             </div>
@@ -252,18 +269,34 @@ export function AirdropERC20({ address }: { address: Address }) {
               }
             >
               Approval amount:{" "}
-              {formatUnits(
+              {tokenInfoData[0]?.result ? formatUnits(
                 BigInt(tokenInfoData[0]?.result ?? 0),
                 tokenInfoData[3]?.result ?? 0
-              )}
+              ) : "n/a"}
               {totalAirdropAmount > BigInt(tokenInfoData[0]?.result ?? 0)
                 ? " - Insufficient approval amount please increase"
-                : " - You are ready to airdrop"}
+                : totalAirdropAmount <= BigInt(tokenInfoData[0]?.result ?? 0)
+                ? " - You are ready to airdrop"
+                : " - No approval found"}
             </p>
           </div>
         ) : (
-          <Skeleton className="w-full h-16" />
+          null
         )}
+        {
+          // if tokenInfoIsPending is true, show the loader
+          tokenInfoIsPending ? (
+            <Skeleton className="w-full h-24" />
+          ) : null
+        }
+        {
+          // if tokenInfoError is true, show the error message
+          tokenInfoError ? (
+            <div className="text-destructive">
+              Error: {(tokenInfoError as BaseError).shortMessage}
+            </div>
+          ) : null
+        }
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">

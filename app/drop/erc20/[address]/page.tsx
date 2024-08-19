@@ -1,4 +1,5 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import dynamic from 'next/dynamic'
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -13,7 +14,6 @@ import { Address } from "viem";
 export default function Page({ params }: { params: { address: Address } }) {
   return (
     <div className="flex flex-col gap-12">
-      <ConnectButton />
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
