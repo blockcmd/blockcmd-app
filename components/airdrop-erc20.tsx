@@ -233,7 +233,7 @@ export function AirdropERC20({ address }: { address: Address }) {
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-          Step 1
+          Step 2
         </h2>
         <div className="flex flex-row gap-2 items-center">
           <Info className="h-4 w-4" />
@@ -274,9 +274,12 @@ export function AirdropERC20({ address }: { address: Address }) {
               ) : "n/a"}
               {totalAirdropAmount > BigInt(tokenInfoData[0]?.result ?? 0)
                 ? " - Insufficient approval amount please increase"
+                : tokenInfoData[0]?.result === undefined
+                ? " - No approval found"
                 : totalAirdropAmount <= BigInt(tokenInfoData[0]?.result ?? 0)
                 ? " - You are ready to airdrop"
-                : " - No approval found"}
+                : null
+              }
             </p>
           </div>
         ) : (
@@ -299,7 +302,7 @@ export function AirdropERC20({ address }: { address: Address }) {
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-          Step 2
+          Step 3
         </h2>
         <div className="flex flex-row gap-2 items-center">
           <Info className="h-4 w-4" />
@@ -413,7 +416,7 @@ export function AirdropERC20({ address }: { address: Address }) {
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-          Step 3
+          Step 4
         </h2>
         <div className="flex flex-row gap-2 items-center">
           <Info className="h-4 w-4" />
@@ -447,7 +450,7 @@ export function AirdropERC20({ address }: { address: Address }) {
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-          Step 4
+          Step 5
         </h2>
         <div className="flex flex-row gap-2 items-center">
           <Info className="h-4 w-4" />

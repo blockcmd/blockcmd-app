@@ -18,7 +18,6 @@ import { CONTRACT_ADDRESS_BAOBAB, CONTRACT_ADDRESS_CYPRESS } from "./contract";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useChainId } from 'wagmi'
-import { useSearchParams } from "next/navigation";
 
 type AirdropItem = {
   address: string;
@@ -26,15 +25,14 @@ type AirdropItem = {
 };
 
 
-export function AirdropERC721() {
-  const searchParams = useSearchParams();
-  const erc721TokenAddress = searchParams.get("address");
+export function AirdropERC721({ address }: { address: Address }) {
+  const erc721TokenAddress = address
   const [airdropList, setAirdropList] = useState<AirdropItem[]>([]);
   const account = useAccount()
   const chainId = useChainId()
   const { data: hash, error, isPending, writeContract } = useWriteContract();
   const { data: approveHash, error: approveError, isPending: approveIsPending, writeContract: approveWriteContract } = useWriteContract();
-
+  const [chainName, setChainName] = useState<string>("");
   const { 
     data: tokenInfoData,
     error: tokenInfoError,
@@ -177,16 +175,20 @@ export function AirdropERC721() {
     <div className="flex flex-col gap-12 w-[768px]">
       <div className="flex flex-col gap-6">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Airdrop NFT on{" "}
-          <a
-            className="underline underline-offset-4 text-blue-500"
-            href="https://coinmarketcap.com/currencies/klaytn/"
-            target="_blank"
-          >
-            KAIA
-          </a>
+          Airdrop ERC721 on{" "}
+          <span>{chainName}</span>
         </h1>
-        <p>Airdrop NFTs to multiple addresses at once.</p>
+        <p>Airdrop ERC721 tokens to multiple addresses at once.</p>
+      </div>
+      <div className="flex flex-col gap-4">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+          Step 1
+        </h2>
+        <div className="flex flex-row gap-2 items-center">
+          <Info className="h-4 w-4" />
+          <p>Make sure to connect your wallet</p>
+        </div>
+        <ConnectButton />
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
