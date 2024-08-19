@@ -12,7 +12,14 @@ import {
   useReadContracts,
 } from "wagmi";
 import { parseEther, formatEther, formatUnits, Address } from "viem";
-import { Loader2, Check, Plus, Info, Trash2, ArrowBigUpDash } from "lucide-react";
+import {
+  Loader2,
+  Check,
+  Plus,
+  Info,
+  Trash2,
+  ArrowBigUpDash,
+} from "lucide-react";
 import { erc20Abi, gasliteAbi } from "./abis";
 import { CONTRACT_ADDRESS_BAOBAB, CONTRACT_ADDRESS_CYPRESS } from "./contract";
 import { useChainId } from "wagmi";
@@ -25,7 +32,7 @@ type AirdropItem = {
 };
 
 export function AirdropERC20({ address }: { address: Address }) {
-  const erc20TokenAddress = address
+  const erc20TokenAddress = address;
   const account = useAccount();
   // state for airdrop list using manual input
   const [airdropList, setAirdropList] = useState<AirdropItem[]>([]);
@@ -55,9 +62,7 @@ export function AirdropERC20({ address }: { address: Address }) {
       {
         abi: erc20Abi,
         functionName: "allowance",
-        address: erc20TokenAddress
-          ? (erc20TokenAddress as Address)
-          : undefined,
+        address: erc20TokenAddress ? (erc20TokenAddress as Address) : undefined,
         args: [
           account.address as Address,
           chainId === 1001 ? CONTRACT_ADDRESS_BAOBAB : CONTRACT_ADDRESS_CYPRESS,
@@ -195,7 +200,6 @@ export function AirdropERC20({ address }: { address: Address }) {
       hash: approveHash,
     });
 
-
   function getChainName(chainId: number) {
     switch (chainId) {
       case 1001:
@@ -203,21 +207,19 @@ export function AirdropERC20({ address }: { address: Address }) {
       case 8217:
         return "Kaia Mainnet";
       default:
-        return "Base"
+        return "Base";
     }
   }
 
   useEffect(() => {
     setChainName(getChainName(chainId));
-  }
-  , [chainId]);
+  }, [chainId]);
 
   return (
     <div className="flex flex-col gap-12 w-[768px]">
       <div className="flex flex-col gap-6">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Airdrop ERC20 on{" "}
-          <span>{chainName}</span>
+          Airdrop ERC20 on <span>{chainName}</span>
         </h1>
         <p>Airdrop ERC20 tokens to multiple addresses at once.</p>
       </div>
@@ -249,14 +251,22 @@ export function AirdropERC20({ address }: { address: Address }) {
           >
             <div className="flex flex-row gap-4 items-center h-16">
               <div className="bg-gray-300 rounded-full h-12 w-12 flex justify-center items-center">
-                <p>{tokenInfoData[1]?.result ? tokenInfoData[1]?.result?.toString().charAt(0) : "X"}</p>
+                <p>
+                  {tokenInfoData[1]?.result
+                    ? tokenInfoData[1]?.result?.toString().charAt(0)
+                    : "X"}
+                </p>
               </div>
               <div className="flex flex-col">
                 <p className="font-semibold text-lg">
-                  {tokenInfoData[2]?.result ? tokenInfoData[2]?.result?.toString() : "No token found"}
+                  {tokenInfoData[2]?.result
+                    ? tokenInfoData[2]?.result?.toString()
+                    : "No token found"}
                 </p>
                 <p className="font-mono text-sm">
-                  {tokenInfoData[1]?.result ? tokenInfoData[1]?.result?.toString() : "No symbol found"}
+                  {tokenInfoData[1]?.result
+                    ? tokenInfoData[1]?.result?.toString()
+                    : "No symbol found"}
                 </p>
               </div>
             </div>
@@ -268,28 +278,25 @@ export function AirdropERC20({ address }: { address: Address }) {
               }
             >
               Approval amount:{" "}
-              {tokenInfoData[0]?.result ? formatUnits(
-                BigInt(tokenInfoData[0]?.result ?? 0),
-                tokenInfoData[3]?.result ?? 0
-              ) : "n/a"}
+              {tokenInfoData[0]?.result
+                ? formatUnits(
+                    BigInt(tokenInfoData[0]?.result ?? 0),
+                    tokenInfoData[3]?.result ?? 0
+                  )
+                : "n/a"}
               {totalAirdropAmount > BigInt(tokenInfoData[0]?.result ?? 0)
                 ? " - Insufficient approval amount please increase"
                 : tokenInfoData[0]?.result === undefined
                 ? " - No approval found"
                 : totalAirdropAmount <= BigInt(tokenInfoData[0]?.result ?? 0)
                 ? " - You are ready to airdrop"
-                : null
-              }
+                : null}
             </p>
           </div>
-        ) : (
-          null
-        )}
+        ) : null}
         {
           // if tokenInfoIsPending is true, show the loader
-          tokenInfoIsPending ? (
-            <Skeleton className="w-full h-24" />
-          ) : null
+          tokenInfoIsPending ? <Skeleton className="w-full h-24" /> : null
         }
         {
           // if tokenInfoError is true, show the error message
@@ -436,7 +443,8 @@ export function AirdropERC20({ address }: { address: Address }) {
         ) : (
           <Button
             disabled={
-              totalAirdropAmount <= BigInt(tokenInfoData ? tokenInfoData[0]?.result ?? 0 : 0)
+              totalAirdropAmount <=
+              BigInt(tokenInfoData ? tokenInfoData[0]?.result ?? 0 : 0)
             }
             className="w-full"
             onClick={handleIncreaseApprovalAmount}

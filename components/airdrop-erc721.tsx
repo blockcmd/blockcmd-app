@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -8,78 +9,98 @@ import {
   useWaitForTransactionReceipt,
   useWriteContract,
   useAccount,
-  useReadContracts
+  useReadContracts,
 } from "wagmi";
 import { parseEther, formatEther, formatUnits, Address } from "viem";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Check, Plus, Info, Trash2, ThumbsUp, CircleX } from "lucide-react";
+import {
+  Loader2,
+  Check,
+  Plus,
+  Info,
+  Trash2,
+  ThumbsUp,
+  CircleX,
+} from "lucide-react";
 import { erc721Abi, gasliteAbi } from "./abis";
 import { CONTRACT_ADDRESS_BAOBAB, CONTRACT_ADDRESS_CYPRESS } from "./contract";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useChainId } from 'wagmi'
+import { useChainId } from "wagmi";
 
 type AirdropItem = {
   address: string;
   nftId: string;
 };
 
-
 export function AirdropERC721({ address }: { address: Address }) {
-  const erc721TokenAddress = address
+  const erc721TokenAddress = address;
   const [airdropList, setAirdropList] = useState<AirdropItem[]>([]);
-  const account = useAccount()
-  const chainId = useChainId()
+  const account = useAccount();
+  const chainId = useChainId();
   const { data: hash, error, isPending, writeContract } = useWriteContract();
-  const { data: approveHash, error: approveError, isPending: approveIsPending, writeContract: approveWriteContract } = useWriteContract();
+  const {
+    data: approveHash,
+    error: approveError,
+    isPending: approveIsPending,
+    writeContract: approveWriteContract,
+  } = useWriteContract();
   const [chainName, setChainName] = useState<string>("");
-  const { 
+  const {
     data: tokenInfoData,
     error: tokenInfoError,
     isPending: tokenInfoIsPending,
     isSuccess: tokenInfoSuccess,
   } = useReadContracts({
-    contracts: [{
+    contracts: [
+      {
         abi: erc721Abi,
-        functionName: 'isApprovedForAll',
-        address: erc721TokenAddress ? erc721TokenAddress as `0x${string}` : undefined,
-        args: [account.address as `0x${string}`, chainId === 1001 ? CONTRACT_ADDRESS_BAOBAB : CONTRACT_ADDRESS_CYPRESS],
-      }, {
+        functionName: "isApprovedForAll",
+        address: erc721TokenAddress
+          ? (erc721TokenAddress as `0x${string}`)
+          : undefined,
+        args: [
+          account.address as `0x${string}`,
+          chainId === 1001 ? CONTRACT_ADDRESS_BAOBAB : CONTRACT_ADDRESS_CYPRESS,
+        ],
+      },
+      {
         abi: erc721Abi,
-        functionName: 'symbol',
+        functionName: "symbol",
         address: erc721TokenAddress as `0x${string}`,
-      }, {
+      },
+      {
         abi: erc721Abi,
-        functionName: 'name',
+        functionName: "name",
         address: erc721TokenAddress as `0x${string}`,
-      }
+      },
     ],
   });
 
-    // state for file input
-    const [file, setFile] = useState<File | undefined>(undefined);
+  // state for file input
+  const [file, setFile] = useState<File | undefined>(undefined);
 
-    useEffect(() => {
-      const fileReader = new FileReader();
-      fileReader.onload = function (e: ProgressEvent<FileReader>) {
-        if (e.target) {
-          const text = e.target.result;
-          csvFileToArray(text);
-        }
-      };
-      if (file) {
-        fileReader.readAsText(file);
+  useEffect(() => {
+    const fileReader = new FileReader();
+    fileReader.onload = function (e: ProgressEvent<FileReader>) {
+      if (e.target) {
+        const text = e.target.result;
+        csvFileToArray(text);
       }
-    }, [file]);
-  
-    function handleImportFile(e: React.ChangeEvent<HTMLInputElement>) {
-      const file = e.target.files?.[0];
-      if (file) {
-        setFile(file);
-      }
+    };
+    if (file) {
+      fileReader.readAsText(file);
     }
+  }, [file]);
 
-      // function to convert the csv file to airdropList
+  function handleImportFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) {
+      setFile(file);
+    }
+  }
+
+  // function to convert the csv file to airdropList
   function csvFileToArray(text: string | ArrayBuffer | null) {
     if (typeof text === "string") {
       const rows = text.split("\n").filter((item) => item !== "");
@@ -133,28 +154,35 @@ export function AirdropERC721({ address }: { address: Address }) {
     );
     writeContract({
       abi: gasliteAbi,
-      address: chainId === 1001 ? CONTRACT_ADDRESS_BAOBAB : CONTRACT_ADDRESS_CYPRESS,
-      functionName: 'airdropERC721',
-      args: [erc721TokenAddress as Address, addresses, airdropNftIds]
-    })
+      address:
+        chainId === 1001 ? CONTRACT_ADDRESS_BAOBAB : CONTRACT_ADDRESS_CYPRESS,
+      functionName: "airdropERC721",
+      args: [erc721TokenAddress as Address, addresses, airdropNftIds],
+    });
   }
 
   function setApproval() {
     approveWriteContract({
       abi: erc721Abi,
       address: erc721TokenAddress as Address,
-      functionName: 'setApprovalForAll',
-      args: [chainId === 1001 ? CONTRACT_ADDRESS_BAOBAB : CONTRACT_ADDRESS_CYPRESS, true]
-    })
+      functionName: "setApprovalForAll",
+      args: [
+        chainId === 1001 ? CONTRACT_ADDRESS_BAOBAB : CONTRACT_ADDRESS_CYPRESS,
+        true,
+      ],
+    });
   }
 
   function revokeApproval() {
     approveWriteContract({
       abi: erc721Abi,
       address: erc721TokenAddress as Address,
-      functionName: 'setApprovalForAll',
-      args: [chainId === 1001 ? CONTRACT_ADDRESS_BAOBAB : CONTRACT_ADDRESS_CYPRESS, false]
-    })
+      functionName: "setApprovalForAll",
+      args: [
+        chainId === 1001 ? CONTRACT_ADDRESS_BAOBAB : CONTRACT_ADDRESS_CYPRESS,
+        false,
+      ],
+    });
   }
 
   function truncateAddress(address: string) {
@@ -171,12 +199,26 @@ export function AirdropERC721({ address }: { address: Address }) {
       hash: approveHash,
     });
 
+  function getChainName(chainId: number) {
+    switch (chainId) {
+      case 1001:
+        return "Kaia Kairos";
+      case 8217:
+        return "Kaia Mainnet";
+      default:
+        return "Base";
+    }
+  }
+
+  useEffect(() => {
+    setChainName(getChainName(chainId));
+  }, [chainId]);
+
   return (
     <div className="flex flex-col gap-12 w-[768px]">
       <div className="flex flex-col gap-6">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Airdrop ERC721 on{" "}
-          <span>{chainName}</span>
+          Airdrop ERC721 on <span>{chainName}</span>
         </h1>
         <p>Airdrop ERC721 tokens to multiple addresses at once.</p>
       </div>
@@ -192,7 +234,7 @@ export function AirdropERC721({ address }: { address: Address }) {
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-          Step 1
+          Step 2
         </h2>
         <div className="flex flex-row gap-2 items-center">
           <Info className="h-4 w-4" />
@@ -219,32 +261,54 @@ export function AirdropERC721({ address }: { address: Address }) {
                 </p>
               </div>
             </div>
-            <p
-              className={
-                tokenInfoData[0]?.result === false
-                  ? "text-destructive"
-                  : "text-primary"
-              }
-            >
-              {tokenInfoData[0]?.result === false
-                ? "You have not set approval"
-                : "You are ready to airdrop"}
-            </p>
-            <Button
-              onClick={tokenInfoData[0]?.result === false ? setApproval : revokeApproval}
-              className={`w-[300px] mt-4 ${tokenInfoData[0]?.result === false ? "bg-primary" : "bg-destructive"}`}
-            >
-              {tokenInfoData[0]?.result === false ? <ThumbsUp className="h-4 w-4 mr-2" /> : <CircleX className="h-4 w-4 mr-2" />}
-              {tokenInfoData[0]?.result === false ? "Set approval" : "Revoke approval"}
-            </Button>
+            {tokenInfoData[0]?.result === false ? (
+              <div>
+                <p className="text-destructive">You have not set approval</p>
+                <Button
+                  onClick={setApproval}
+                  className="w-[300px] mt-4 bg-primary"
+                >
+                  <ThumbsUp className="h-4 w-4 mr-2" />
+                  Set approval
+                </Button>
+              </div>
+            ) : tokenInfoData[0]?.result === undefined ? (
+              <div>
+                <p className="text-destructive">No token found</p>
+                <Button disabled className="w-[300px] mt-4 bg-destructive">
+                  N/A
+                </Button>
+              </div>
+            ) : (
+              <div>
+                <p className="text-primary">You are ready to airdrop</p>
+                <Button
+                  onClick={revokeApproval}
+                  className="w-[300px] mt-4 bg-destructive"
+                >
+                  <CircleX className="h-4 w-4 mr-2" />
+                  Revoke approval
+                </Button>
+              </div>
+            )}
           </div>
-        ) : (
-          <Skeleton className="w-full h-16" />
-        )}
+        ) : null}
+        {
+          // if tokenInfoIsPending is true, show the loader
+          tokenInfoIsPending ? <Skeleton className="w-full h-24" /> : null
+        }
+        {
+          // if tokenInfoError is true, show the error message
+          tokenInfoError ? (
+            <div className="text-destructive">
+              Error: {(tokenInfoError as BaseError).shortMessage}
+            </div>
+          ) : null
+        }
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-          Step 2
+          Step 3
         </h2>
         <div className="flex flex-row gap-2 items-center">
           <Info className="h-4 w-4" />
