@@ -23,7 +23,7 @@ export default function Page({ params }: { params: { address: Address } }) {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Airdrop NFTs</BreadcrumbPage>
+            <BreadcrumbPage>Airdrop ERC721</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

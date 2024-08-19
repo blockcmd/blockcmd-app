@@ -11,8 +11,7 @@ import {
   useAccount,
   useReadContracts,
 } from "wagmi";
-import { parseEther, formatEther, formatUnits, Address } from "viem";
-import { Badge } from "@/components/ui/badge";
+import { parseEther, Address } from "viem";
 import {
   Loader2,
   Check,
