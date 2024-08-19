@@ -13,8 +13,7 @@ import {
 import { parseEther, formatEther, formatUnits, Address } from "viem";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Check, Plus, Info, Trash2, ThumbsUp, CircleX } from "lucide-react";
-import { abi } from "./abi";
-import { erc721Abi } from "./erc721-abi";
+import { erc721Abi, gasliteAbi } from "./abis";
 import { CONTRACT_ADDRESS_BAOBAB, CONTRACT_ADDRESS_CYPRESS } from "./contract";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -135,7 +134,7 @@ export function AirdropERC721() {
       parseEther(item.nftId)
     );
     writeContract({
-      abi,
+      abi: gasliteAbi,
       address: chainId === 1001 ? CONTRACT_ADDRESS_BAOBAB : CONTRACT_ADDRESS_CYPRESS,
       functionName: 'airdropERC721',
       args: [erc721TokenAddress as Address, addresses, airdropNftIds]

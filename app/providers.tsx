@@ -11,9 +11,7 @@ import {
   ledgerWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 import {
-  baseSepolia,
-  arbitrumSepolia,
-  optimismSepolia,
+  klaytn,
   klaytnBaobab
 } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -34,15 +32,11 @@ const config = getDefaultConfig({
     },
   ],
   chains: [
-    baseSepolia,
-    arbitrumSepolia,
-    optimismSepolia,
+    klaytn,
     klaytnBaobab
   ],
   transports: {
-    [baseSepolia.id]: http('https://rpc.ankr.com/base_sepolia'),
-    [arbitrumSepolia.id]: http('https://rpc.ankr.com/arbitrum_sepolia'),
-    [optimismSepolia.id]: http('https://rpc.ankr.com/optimism_sepolia'),
+    [klaytn.id]: http('https://rpc.ankr.com/klaytn'),
     [klaytnBaobab.id]: http('https://rpc.ankr.com/klaytn_testnet'),
   },
   ssr: true, // Because it is Nextjs's App router, you need to declare ssr as true
