@@ -12,7 +12,7 @@ import {
 } from "wagmi";
 import { parseEther, formatEther, Address } from "viem";
 import { Loader2, Check, Plus, Info, Trash2 } from "lucide-react";
-import { abi } from "./abi";
+import { gasliteAbi } from "./abis";
 import { CONTRACT_ADDRESS_BAOBAB, CONTRACT_ADDRESS_CYPRESS } from "./contract";
 import { useChainId } from "wagmi";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -119,7 +119,7 @@ export default function AirdropNative() {
       parseEther(item.amount)
     );
     writeContract({
-      abi,
+      abi: gasliteAbi,
       address:
         chainId === 1001 ? CONTRACT_ADDRESS_BAOBAB : CONTRACT_ADDRESS_CYPRESS,
       functionName: "airdropETH",
