@@ -56,14 +56,6 @@ export default function Page() {
             <ArrowRight className="w-8 h-8" />
           </div>
         </Link>
-        <Link href="/drop/erc721">
-          <div className="flex flex-row justify-between items-center shadow-lg w-full p-8 border-2 border-secondary hover:border-primary">
-            <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">
-              Airdrop ERC1155 Token
-            </h2>
-            <ArrowRight className="w-8 h-8" />
-          </div>
-        </Link>
       </div>
     </div>
   );

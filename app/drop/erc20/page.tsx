@@ -14,10 +14,11 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import MyDropContractBookTable from "@/components/my-drop-contract-book-table";
 import { ContractTableEntry } from "@/components/my-contract-book-table";
-import { blockcmdAddressBook, AddressBookEntry } from "@/components/blockcmd-address-book";
+import { blockcmdContractBook, ContractBookEntry } from "@/components/blockcmd-contract-book";
 import { get } from "idb-keyval";
 import { getAddress } from "viem";
 import { ArrowRight } from "lucide-react";
+import BlockcmdContractBookTable from "@/components/blockcmd-contract-book-table";
 
 export default function Page() {
   const [contractAddress, setContractAddress] = useState("");
@@ -36,6 +37,10 @@ export default function Page() {
     e: React.ChangeEvent<HTMLInputElement>
   ) {
     setContractAddress(e.target.value);
+  }
+
+  function filterBlockcmdContractBookForERC20(blockcmdContractBook: ContractBookEntry[]) {
+    return blockcmdContractBook.filter((entry) => entry.tokenType === "ERC20");
   }
   
   return (
@@ -101,7 +106,7 @@ export default function Page() {
             See full BlockCMD address book <ArrowRight className="ml-2 w-4 h-4" />
           </Link>
         </Button>
-        {/* <BlockcmdAddressBookTable blockcmdAddressBook={filterAddressBookForKaia(blockcmdAddressBook)} /> */}
+        <BlockcmdContractBookTable blockcmdContractBook={filterBlockcmdContractBookForERC20(blockcmdContractBook)} />
       </div>
     </div>
   );
