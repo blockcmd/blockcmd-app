@@ -16,7 +16,7 @@ import { getAddress } from "viem";
 import { ArrowRight } from "lucide-react";
 import { get } from "idb-keyval";
 // import BlockcmdAddressBookTable from "@/components/blockcmd-address-book-table";
-import { blockcmdAddressBook, AddressBookEntry } from "@/components/blockcmd-address-book";
+import { AddressBookEntry } from "@/components/blockcmd-address-book";
 import MyContractBookTable from "@/components/my-contract-book-table";
 import { ContractTableEntry } from "@/components/my-contract-book-table";
 
@@ -28,8 +28,11 @@ export default function Page() {
   useEffect(() => {
     {
       get("saved_contracts").then((savedContracts: ContractTableEntry[]) => {
+        if (savedContracts === undefined) {
+          savedContracts = [];
+        }
         let filteredSavedContracts = savedContracts.filter((entry) => entry.network === "kaia-kairos");
-        setSavedContracts(filteredSavedContracts || []);
+        setSavedContracts(filteredSavedContracts);
       });
     }
   }, [savedContracts]);

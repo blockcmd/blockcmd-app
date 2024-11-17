@@ -11,8 +11,8 @@ import {
   ledgerWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 import {
-  klaytn,
-  klaytnBaobab
+  kaia,
+  kairos
 } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider, http } from 'wagmi';
@@ -22,7 +22,7 @@ const { wallets } = getDefaultWallets();
 // initialize and destructure wallets object
 
 const config = getDefaultConfig({
-  appName: 'BLOCKCMD_INSPECT', // Name your app
+  appName: 'BLOCKCMD_APP', // Name your app
   projectId: "e0e485365ce5d5ab04d3dd795f627315", // Enter your WalletConnect Project ID here
   wallets: [
     ...wallets,
@@ -32,12 +32,12 @@ const config = getDefaultConfig({
     },
   ],
   chains: [
-    klaytn,
-    klaytnBaobab
+    kaia,
+    kairos
   ],
   transports: {
-    [klaytn.id]: http('https://rpc.ankr.com/klaytn'),
-    [klaytnBaobab.id]: http('https://rpc.ankr.com/klaytn_testnet'),
+    [kaia.id]: http('https://rpc.ankr.com/klaytn'),
+    [kairos.id]: http('https://rpc.ankr.com/klaytn_testnet'),
   },
   ssr: true, // Because it is Nextjs's App router, you need to declare ssr as true
 });
